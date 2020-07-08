@@ -2466,6 +2466,25 @@ textarea {
     }
 }
 
+.about-slider__block p {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+@media (min-width: 768px) {
+    .about-slider__block p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .about-slider__block p {
+        font-size: 18px;
+        line-height: 33px;
+    }
+}
+
 @media (min-width: 375px) {
     .news-bottom {
         display: flex;

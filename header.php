@@ -36,8 +36,12 @@
             </div>
             <div class="header__item">
                 <ul class="phone-block">
-                    <li><a class="phone" href="tel:7499787995">+7 (499) 787 99 5</a></li>
-                    <li><span class="work-time">5/2 9:00 - 18:00</span></li>
+                    <?php 
+                        $phone_header = get_field('телефон_в_шапке', 21); 
+                        $phone_header_clear = get_tel_href($phone_header);
+                    ?>
+                    <li><a class="phone" href="tel:<?php echo $phone_header_clear ?>"><?php the_field('телефон_в_шапке', 21) ?></a></li>
+                    <li><span class="work-time"><?php the_field('время_работы_контакты', 21) ?></span></li>
                 </ul>
                 <button class="recall call-btn" type="button"><span>Заказать звонок</span></button>
             </div>
