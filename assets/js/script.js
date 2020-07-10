@@ -23,6 +23,28 @@ $(document).ready(function() {
     });
 
 
+    var page = 3;
+    $('.news-block__btn').click(function() {
+        // alert(1);
+        // console.log();
+        $.ajax({
+            url: indiwoodApp.ajax,
+            type: 'POST',
+            data: { action: 'getnews', news_page: page }, // можно 
+            success: function(data) {
+                if (typeof data === 'string') {
+                    $('.news-listing').html(data);
+                    page++;
+                    console.log(data + page);
+
+                } else {
+                    console.log('Ошибка запроса');
+                }
+            }
+        });
+    });
+
+
     $('#catalogList a').click(function(e) {
 
         e.preventDefault();

@@ -365,134 +365,44 @@ Template Name: Главная
     <!-- О компании -->
     <?php get_template_part('template-parts/about-block'); ?>
 
-    <div class="team-block line-bottom">
-        <p class="main-title team-block__title"><b>Команда </b>indiwood</p>
-        <div class="team-block__inner">
-            <div class="swiper-container team-gallery">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="swiper-slide">
-                        <ul class="team-gallery__list">
-                            <li>
-                                <div class="team-gallery__image team-gallery__image_big"><img src="img/team.jpg"></div>
-                                <p class="team-gallery__name">James Read</p>
-                                <p class="team-gallery__prof">Technical manager</p>
-                            </li>
-                            <li>
-                                <p class="team-gallery__article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="swiper-button-next swiper-button-black"></div>
-                <div class="swiper-button-prev swiper-button-black"></div>
-            </div>
-            <div class="swiper-container team-gallery-thumbs">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="team-gallery__image team-gallery__image_thumb"><img src="img/team.jpg"></div>
-                        <p class="team-gallery__name team-gallery__name_thumb">James Read</p>
-                        <p class="team-gallery__prof">Technical manager</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Команда indiwood -->
+    <?php get_template_part('template-parts/team-block'); ?>
+
     <div class="news-block line-bottom">
         <p class="main-title news-block__title">
             indiwood <b>новости</b></p>
-        <ul class="news-top">
-            <li class="news-top__item">
+
+        <?php 
+            $posts_news = get_posts( array(
+                // 'numberposts' => 4,
+                'order' => 'ASC',
+                'post_type'   => 'post_news',
+                'suppress_filters' => true,
+                'posts_per_page' => '2',
+                'paged' => 1
+            ) );
+        ?>        
+        <!-- <ul class="news-top"> -->
+        <ul class="news-listing">
+
+            <?php    
+                foreach( $posts_news as $post ) { 
+                    setup_postdata($post);
+                    get_template_part('template-parts/news-block'); 
+                }
+                wp_reset_postdata();
+
+                $count = wp_count_posts('post_news');
+                var_dump($count);
+            ?>  
+        </ul>
+        <?php //echo //do_shortcode( '[ajax_load_more id="8957675556" loading_style="purple" container_type="ul" css_classes="news_block_list" post_type="post_news" posts_per_page="1" post_format="standard" scroll="false"]'); ?>
+
+
+        <!-- <ul class="news-top"> -->
+
+
+            <!-- <li class="news-top__item">
                 <p class="news-date">15th november 2020</p>
                 <p class="news-title">Royal beach</p>
                 <p class="news-sup-title">yacht club</p>
@@ -508,8 +418,9 @@ Template Name: Главная
                     </li>
                 </ul>
                 <div class="read-more"><a href="#">read more</a></div>
-            </li>
-            <li class="news-top__item">
+            </li> -->
+
+            <!-- <li class="news-top__item">
                 <div class="news-date">15th november 2020</div>
                 <p class="news-title">Royal beach</p>
                 <p class="news-sup-title">yacht club</p>
@@ -525,9 +436,9 @@ Template Name: Главная
                     </li>
                 </ul>
                 <div class="read-more"><a href="#">read more</a></div>
-            </li>
-        </ul>
-        <ul class="news-bottom">
+            </li> -->
+        <!-- </ul> -->
+        <!-- <ul class="news-bottom">
             <li class="news-bottom__item">
                 <div class="news-date">15th november 2020</div>
                 <p class="news-title">Royal beach</p>
@@ -564,11 +475,13 @@ Template Name: Главная
                     aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                 <div class="read-more"><a href="#">read more    </a></div>
             </li>
-        </ul>
+        </ul> -->
         <div class="news-block__btn-wrap">
             <button class="btn news-block__btn" type="button">Смотреть еще    </button>
         </div>
     </div>
+
+
     <div class="seo-block line-bottom">
         <p class="main-title seo-block__title">indiwood seo <b>текст</b></p>
         <ul class="seo-block__cont article">

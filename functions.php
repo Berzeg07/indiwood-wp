@@ -9,8 +9,8 @@ add_action( 'init', 'register_post_banner_main' );
 add_action( 'init', 'register_post_product' );
 // Калькулятор террас *
 add_action( 'init', 'register_post_calc_terrace' );
-// Применение indiwood *
-// add_action( 'init', 'register_post_application' );
+// Новости *
+add_action( 'init', 'register_post_news' );
 
 function get_tel_href($tel) {
     return preg_replace("/[^+0-9]/", '', $tel);
@@ -84,47 +84,82 @@ function indiwood_get_catalog() {
 	}
 }
 
-// function register_post_application(){
-// 	register_post_type( 'post_application', [
-// 		'label'  => null,
-// 		'labels' => [
-// 			'name'               => 'Применение', // основное название для типа записи
-// 			'singular_name'      => 'Калькулятор', // название для одной записи этого типа
-// 			'add_new'            => 'Добавить калькулятор', // для добавления новой записи
-// 			'add_new_item'       => 'Добавление калькулятор', // заголовка у вновь создаваемой записи в админ-панели.
-// 			'edit_item'          => 'Редактирование калькулятора', // для редактирования типа записи
-// 			'new_item'           => 'Новый калькулятор', // текст новой записи
-// 			'view_item'          => 'Смотреть калькулятор', // для просмотра записи этого типа.
-// 			'all_items' => 'Все калькуляторы',
-// 			'search_items'       => 'Искать калькулятор', // для поиска по этим типам записи
-// 			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
-// 			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
-// 			'parent_item_colon'  => '', // для родителей (у древовидных типов)
-// 			'menu_name'          => 'Калькуляторы', // название меню
-// 		],
-// 		'description'         => '',
-// 		'public'              => true,
-// 		'publicly_queryable'  => true, // зависит от public
-// 		'exclude_from_search' => true, // зависит от public
-// 		'show_ui'             => true, // зависит от public
-// 		'show_in_nav_menus'   => true, // зависит от public
-// 		'show_in_menu'        => true, // показывать ли в меню адмнки
-// 		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
-// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-// 		'rest_base'           => null, // $post_type. C WP 4.7
-// 		'menu_position'       => 5,
-// 		'menu_icon'           => 'dashicons-admin-settings',
-// 		//'capability_type'   => 'post',
-// 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
-// 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
-// 		'hierarchical'        => false,
-// 		'supports'            => [ 'title' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-// 		'taxonomies'          => [],
-// 		'has_archive'         => false,
-// 		'rewrite'             => true,
-// 		'query_var'           => true,
-// 	] );
-// }
+if (wp_doing_ajax()) {
+    add_action('wp_ajax_getnews', 'indiwood_get_news');
+    add_action('wp_ajax_nopriv_getnews', 'indiwood_get_news');
+}
+function indiwood_get_news() {
+	if (isset($_POST)) {
+		global $post;
+		$news_page = $_POST['news_page'] ? sanitize_text_field($_POST['news_page']) : false;
+
+		$posts_news = get_posts( array(
+			// 'numberposts' => 4,
+			'order' => 'ASC',
+			'post_type'   => 'post_news',
+			'suppress_filters' => true,
+			'posts_per_page' => $news_page,
+			'paged' => 1
+		) );
+
+		foreach( $posts_news as $post ) { 
+			setup_postdata($post);
+			get_template_part('template-parts/news-block'); 
+		}
+
+		
+		wp_reset_postdata();
+		// get_template_part('template-parts/catalog-list');
+		// exit;
+		wp_die();
+	} else {
+ 	   echo json_encode(['error' => true, 'message' => '1']);
+		// exit;
+		wp_die();
+	}
+}
+
+function register_post_news(){
+	register_post_type( 'post_news', [
+		'label'  => null,
+		'labels' => [
+			'name'               => 'Новости', // основное название для типа записи
+			'singular_name'      => 'Новости', // название для одной записи этого типа
+			'add_new'            => 'Добавить новость', // для добавления новой записи
+			'add_new_item'       => 'Добавление новости', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редактирование новости', // для редактирования типа записи
+			'new_item'           => 'Новая новость', // текст новой записи
+			'view_item'          => 'Смотреть новость', // для просмотра записи этого типа.
+			'all_items' => 'Все новости',
+			'search_items'       => 'Искать новость', // для поиска по этим типам записи
+			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Новости', // название меню
+		],
+		'description'         => '',
+		'public'              => true,
+		'publicly_queryable'  => true, // зависит от public
+		'exclude_from_search' => false, // зависит от public
+		'show_ui'             => true, // зависит от public
+		'show_in_nav_menus'   => true, // зависит от public
+		'show_in_menu'        => true, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-list-view',
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => true,
+		'supports'            => [ 'title','editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => [],
+		'has_archive'         => true,
+		'rewrite'             => true,
+		'query_var'           => true,
+	] );
+}
 
 function register_post_calc_terrace(){
 	register_post_type( 'calc_terrace', [

@@ -2246,6 +2246,8 @@ textarea {
     width: 162px;
     height: 162px;
     margin: 0 auto 20px;
+    border-radius: 10em;
+    overflow: hidden;
 }
 
 @media (max-width: 767px) {
@@ -2262,11 +2264,23 @@ textarea {
     }
 }
 
+.team-gallery__image_big {
+    border-radius: 10em;
+    overflow: hidden;
+}
+
 @media (max-width: 767px) {
     .team-gallery__image_big {
         width: 220px;
         height: 220px;
         margin: 0 auto 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .team-gallery__image_big {
+        width: 267px;
+        height: 267px;
     }
 }
 
@@ -2559,6 +2573,36 @@ textarea {
     .news-block__btn-wrap {
         padding: 115px 0 160px;
     }
+}
+
+.news-listing {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.news-listing .news-preview-list li:nth-child(2) {
+    display: none;
+}
+
+.news-preview-list li {
+    width: 100%;
+}
+
+.news-listing .news-item:first-child .news-preview-list li,
+.news-listing .news-item:nth-child(2) .news-preview-list li {
+    display: inline-block;
+    width: 48%;
+}
+
+.news-listing .news-item {
+    width: 24%;
+}
+
+.news-listing .news-item:first-child,
+.news-listing .news-item:nth-child(2) {
+    width: 48%;
+    margin-bottom: 98px;
 }
 
 .news-block__btn {
