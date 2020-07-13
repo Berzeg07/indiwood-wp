@@ -44,80 +44,110 @@ function indiwood_get_catalog() {
 	if (isset($_POST)) {
 		global $post;
 		$productId = $_POST['productId'] ? sanitize_text_field($_POST['productId']) : false;
-		// $post = get_post($productId);
-		// setup_postdata($post);
-		$posts = get_posts( array(
-			'numberposts' => -1,
-			// 'category'    => 10,
-			// 'taxonomy' => 'categories',
-			'orderby'     => 'date',
-			'order'       => 'DESC',
-			'include'     => array(),
-			'exclude'     => array(),
-			'meta_key'    => '',
-			'meta_value'  =>'',
-			'post_type'   => 'product',
-			'suppress_filters' => true, 
-			'tax_query' => array(                              
-				array(
-					'taxonomy' => 'categories',
-					'field'    => 'slug',
-					'terms'    => $productId
-				)
-			),
-		) );
+		if($productId != 'false'){
+			$posts = get_posts( array(
+				'numberposts' => -1,
+				'order'       => 'ASC',
+				'post_type'   => 'product',
+				'suppress_filters' => true, 
+				'tax_query' => array(                              
+					array(
+						'taxonomy' => 'categories',
+						'field'    => 'slug',
+						'terms'    => $productId
+					)
+				),
+			) );
+		}else{
+			$posts = get_posts( array(
+				// 'numberposts' => -1,
+				'order' => 'ASC',
+				'post_type'   => 'product',
+				'suppress_filters' => true,
+				'posts_per_page' => '2',
+                'paged' => 1
+			) );
+		}
 		
 		foreach( $posts as $post ){
 			setup_postdata($post);
 			get_template_part('template-parts/catalog-list'); 
-	
 		}
 		
 		wp_reset_postdata();
-		// get_template_part('template-parts/catalog-list');
-		// exit;
 		wp_die();
 	} else {
  	   echo json_encode(['error' => true, 'message' => '1']);
-		// exit;
 		wp_die();
 	}
 }
 
 if (wp_doing_ajax()) {
-    add_action('wp_ajax_getnews', 'indiwood_get_news');
-    add_action('wp_ajax_nopriv_getnews', 'indiwood_get_news');
+    add_action('wp_ajax_get_catalog', 'indiwood_get_cat');
+    add_action('wp_ajax_nopriv_get_catalog', 'indiwood_get_cat');
 }
-function indiwood_get_news() {
+function indiwood_get_cat() {
 	if (isset($_POST)) {
 		global $post;
 		$news_page = $_POST['news_page'] ? sanitize_text_field($_POST['news_page']) : false;
 
-		$posts_news = get_posts( array(
-			// 'numberposts' => 4,
+		$posts = get_posts( array(
+			// 'numberposts' => -1,
 			'order' => 'ASC',
-			'post_type'   => 'post_news',
+			'post_type'   => 'product',
 			'suppress_filters' => true,
 			'posts_per_page' => $news_page,
 			'paged' => 1
 		) );
 
-		foreach( $posts_news as $post ) { 
+		foreach( $posts as $post ){
 			setup_postdata($post);
-			get_template_part('template-parts/news-block'); 
+			get_template_part('template-parts/catalog-list'); 
 		}
 
 		
 		wp_reset_postdata();
-		// get_template_part('template-parts/catalog-list');
-		// exit;
 		wp_die();
 	} else {
  	   echo json_encode(['error' => true, 'message' => '1']);
-		// exit;
 		wp_die();
 	}
 }
+
+// if (wp_doing_ajax()) {
+//     add_action('wp_ajax_getnews', 'indiwood_get_news');
+//     add_action('wp_ajax_nopriv_getnews', 'indiwood_get_news');
+// }
+// function indiwood_get_news() {
+// 	if (isset($_POST)) {
+// 		global $post;
+// 		$news_page = $_POST['news_page'] ? sanitize_text_field($_POST['news_page']) : false;
+
+// 		$posts_news = get_posts( array(
+// 			// 'numberposts' => 4,
+// 			'order' => 'ASC',
+// 			'post_type'   => 'post_news',
+// 			'suppress_filters' => true,
+// 			'posts_per_page' => $news_page,
+// 			'paged' => 1
+// 		) );
+
+// 		foreach( $posts_news as $post ) { 
+// 			setup_postdata($post);
+// 			get_template_part('template-parts/news-block'); 
+// 		}
+
+		
+// 		wp_reset_postdata();
+// 		// get_template_part('template-parts/catalog-list');
+// 		// exit;
+// 		wp_die();
+// 	} else {
+//  	   echo json_encode(['error' => true, 'message' => '1']);
+// 		// exit;
+// 		wp_die();
+// 	}
+// }
 
 function register_post_news(){
 	register_post_type( 'post_news', [

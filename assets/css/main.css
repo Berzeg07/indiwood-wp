@@ -4896,11 +4896,12 @@ input::-webkit-inner-spin-button {
     position: absolute;
     top: 5px;
     left: 28px;
-    background-image: url("../img/cicrle-terras.png");
+    /* background-image: url("../img/cicrle-terras.png"); */
     background-repeat: no-repeat;
     background-position: 0 0;
-    width: 29px;
-    height: 29px;
+    /* width: 29px;
+    height: 29px; */
+    opacity: 0;
 }
 
 @media (min-width: 768px) {
@@ -4976,7 +4977,7 @@ input::-webkit-inner-spin-button {
     width: 20px;
     height: 20px;
     background-size: cover;
-    background-image: url(../img/cicrle-terras.png);
+    /* background-image: url(../img/cicrle-terras.png); */
 }
 
 @media (min-width: 768px) {

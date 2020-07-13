@@ -27,21 +27,19 @@ $(document).ready(function() {
         });
     });
 
-
     var page = 3;
-    $('.news-block__btn').click(function() {
+    $('#btn_more_catalog').click(function() {
         // alert(1);
         // console.log();
         $.ajax({
             url: indiwoodApp.ajax,
             type: 'POST',
-            data: { action: 'getnews', news_page: page }, // можно 
+            data: { action: 'get_catalog', news_page: page }, // можно 
             success: function(data) {
                 if (typeof data === 'string') {
-                    $('.news-listing').html(data);
+                    $('#catalogProduct').html(data);
                     page++;
-                    console.log(data + page);
-
+                    initProductCardScripts();
                 } else {
                     console.log('Ошибка запроса');
                 }
@@ -49,18 +47,49 @@ $(document).ready(function() {
         });
     });
 
+    // Скрипт для кнопки еще (Новости. Временно скрыт)
+    // var page = 3;
+    // $('.news-block__btn').click(function() {
+    //     // alert(1);
+    //     // console.log();
+    //     $.ajax({
+    //         url: indiwoodApp.ajax,
+    //         type: 'POST',
+    //         data: { action: 'getnews', news_page: page }, // можно 
+    //         success: function(data) {
+    //             if (typeof data === 'string') {
+    //                 $('.news-listing').html(data);
+    //                 page++;
+    //                 console.log(data + page);
 
-    $('#catalogList a').click(function(e) {
+    //             } else {
+    //                 console.log('Ошибка запроса');
+    //             }
+    //         }
+    //     });
+    // });
+
+
+    $('.catalogList a').click(function(e) {
 
         e.preventDefault();
         var $this = $(e.target);
-        $('#catalogList a').removeClass('is-active');
+        $('.catalogList a').removeClass('is-active');
         $this.addClass('is-active');
+
+        var attrVal = $this.attr('data-attr');
+        var dataId;
         // console.log();
+        if (attrVal != 'Все') {
+            dataId = attrVal;
+        } else {
+            dataId = false;
+            console.log(dataId);
+        }
         $.ajax({
             url: indiwoodApp.ajax,
             type: 'POST',
-            data: { action: 'getproductList', productId: $this.attr('data-attr') }, // можно 
+            data: { action: 'getproductList', productId: dataId }, // можно 
             success: function(data) {
                 if (typeof data === 'string') {
                     $('#catalogProduct').html(data);

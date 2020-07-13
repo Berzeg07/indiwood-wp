@@ -251,101 +251,75 @@
             <!-- end slider-up -->
             <div class="swiper-container calculate-gallery-top terras-slider-up-six" data-item="6" data-title="06. Выберите модель, цвет и укажите необходимые параметры лестницы">
                 <div class="swiper-wrapper">
-                    
-                    <div class="swiper-slide">
-                        <div class="terras-top1-question">
-                            <div class="terras-top1-question_one">
-                                <h3>Требуется ли установка лестницы?</h3>
-                                <ul>
-                                    <li><button class="terras-btn-no" type="button">Нет</button></li>
-                                    <li><button class="terras-btn-yes" type="button">Да</button></li>
-                                </ul>
-                            </div>
-                            <div class="terras-top1-question_two">
-                                <h3>Unodesc scala</h3>
-                                <ul>
-                                    <li>
-                                        <div class="terras-steps">
-                                            <span class="minus">-</span>
-                                            <span class="num">5</span>
-                                            <span class="plus">+</span>
+
+                    <?php if( have_rows('галерея_лестница', 134) ): ?>
+                        <?php while( have_rows('галерея_лестница', 134) ): the_row();
+                            $model_les = get_sub_field('модель_лестница');
+                            $model_les_img = get_sub_field('картинка_модели_лестницы');
+                        ?>
+                            <?php if($model_les_img): ?>
+                                <div class="swiper-slide">
+                                    <div class="terras-top1-question">
+                                        <div class="terras-top1-question_one">
+                                            <h3>Требуется ли установка лестницы?</h3>
+                                            <ul>
+                                                <li><button class="terras-btn-no" type="button">Нет</button></li>
+                                                <li><button class="terras-btn-yes" type="button">Да</button></li>
+                                            </ul>
                                         </div>
-                                        <h4>Кол-во ступеней</h4>
-                                    </li>
-                                    <li>
-                                        <div class="terras-width">
-                                            <span class="minus">-</span>
-                                            <span class="num">3,5</span>
-                                            <span class="plus">+</span>
+                                        <div class="terras-top1-question_two">
+                                            <h3><?php echo $model_les ?></h3>
+                                            <ul>
+                                                <li>
+                                                    <div class="terras-steps">
+                                                        <span class="minus">-</span>
+                                                        <span class="num">5</span>
+                                                        <span class="plus">+</span>
+                                                    </div>
+                                                    <h4>Кол-во ступеней</h4>
+                                                </li>
+                                                <li>
+                                                    <div class="terras-width">
+                                                        <span class="minus">-</span>
+                                                        <span class="num">3,5</span>
+                                                        <span class="plus">+</span>
+                                                    </div>
+                                                    <h4>Длина (в метрах)</h4>
+                                                </li>
+                                                <li>
+                                                    <div class="terras-calc">
+                                                        <select>
+                                                            <?php if( have_rows('добавить_цвет_модели', 134) ): ?>
+                                                                <?php while( have_rows('добавить_цвет_модели', 134) ): the_row();
+                                                                    $color_icon_les = get_sub_field('название_цвета_модели_л');
+                                                                    $color_img_les = get_sub_field('картинка_цвета_л');
+                                                                ?>
+                                                                    <?php if($color_icon_les): ?>
+                                                                        <option value="<?php echo $color_icon_les ?>">
+                                                                            <?php echo $color_icon_les ?>
+                                                                        </option>
+                                                                    <?php endif; ?>
+                                                                <?php endwhile; ?>
+                                                            <?php endif; ?>
+                                                            <!-- <option value="Орех">Орех</option>
+                                                            <option value="Венге">Венге</option>
+                                                            <option value="Орех">Орех</option>
+                                                            <option value="Орех">Орех</option>
+                                                            <option value="Орех">Орех</option> -->
+                                                        </select>
+                                                    </div>
+                                                    <h4>Цвет</h4>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <h4>Длина (в метрах)</h4>
-                                    </li>
-                                    <li>
-                                        <div class="terras-calc">
-                                            <select>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Венге">Венге</option>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Орех">Орех</option>
-                                            </select>
-                                        </div>
-                                        <h4>Цвет</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="terras-top1-column">
-                            <img src="img/slider1-big1.png" alt="slider1">
-                        </div>
-                    </div>
-                    <!-- <div class="swiper-slide">
-                        <div class="terras-top1-question">
-                            <div class="terras-top1-question_one">
-                                <h3>Требуется ли установка лестницы?</h3>
-                                <ul>
-                                    <li><button class="terras-btn-no" type="button">Нет</button></li>
-                                    <li><button class="terras-btn-yes" type="button">Да</button></li>
-                                </ul>
-                            </div>
-                            <div class="terras-top1-question_two">
-                                <h3>Unodesc scala</h3>
-                                <ul>
-                                    <li>
-                                        <div class="terras-steps">
-                                            <span class="minus">-</span>
-                                            <span class="num">5</span>
-                                            <span class="plus">+</span>
-                                        </div>
-                                        <h4>Кол-во ступеней</h4>
-                                    </li>
-                                    <li>
-                                        <div class="terras-width">
-                                            <span class="minus">-</span>
-                                            <span class="num">3,5</span>
-                                            <span class="plus">+</span>
-                                        </div>
-                                        <h4>Длина (в метрах)</h4>
-                                    </li>
-                                    <li>
-                                        <div class="terras-calc">
-                                            <select>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Венге">Венге</option>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Орех">Орех</option>
-                                                <option value="Орех">Орех</option>
-                                            </select>
-                                        </div>
-                                        <h4>Цвет</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="terras-top1-column">
-                            <img src="img/slider1-big1.png" alt="slider1">
-                        </div>
-                    </div> -->
+                                    </div>
+                                    <div class="terras-top1-column">
+                                        <img src="<?php echo $model_les_img ?>">
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="swiper-button-next swiper-button-white"></div>
                 <div class="swiper-button-prev swiper-button-white"></div>
@@ -477,18 +451,21 @@
         </div>
         <div class="swiper-container calculate-gallery-thumbs terras-gallery-thumbs-six" data-item="6">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="gallery-thumbs1-column">
-                        <img src="img/slider1-small.png" alt="slider1-down">
-                    </div>
-                    <span>Unodeck Scala</span>
-                </div>
-                <div class="swiper-slide">
-                    <div class="gallery-thumbs1-column">
-                        <img src="img/slider1-small.png" alt="slider1-down">
-                    </div>
-                    <span>Unodeck Vintage</span>
-                </div>
+                <?php if( have_rows('галерея_лестница', 134) ): ?>
+                    <?php while( have_rows('галерея_лестница', 134) ): the_row();
+                        $min_img = get_sub_field('картинка_модели_лестницы');
+                        $name_min_img = get_sub_field('модель_лестница');
+                    ?>
+                        <?php if($min_img): ?>
+                            <div class="swiper-slide">
+                                <div class="gallery-thumbs1-column">
+                                    <img src="<?php echo $min_img ?>">
+                                </div>
+                                <span><?php echo $name_min_img ?></span>
+                            </div>
+                        <?php endif; ?>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

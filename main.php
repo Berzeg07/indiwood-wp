@@ -60,54 +60,39 @@ Template Name: Главная
     </div>
     <div class="content catalog-top">
         <p class="content-title-mob">Каталог</p>
-        <div class="product-list-slider swiper-container">
+        <div class="product-list-slider swiper-container catalogList">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><a class="product-link" href="#">Все</a></div>
-                <div class="swiper-slide"><a class="product-link is-active" href="#">Террасная доска</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">UnoDeck Mogano</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">Ступени</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">Заборная доска</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">Заборы</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">Ограждения</a></div>
-                <div class="swiper-slide"><a class="product-link" href="#">Комплектующие</a></div>
+                <div class="swiper-slide"><a class="product-link is-active" data-attr="Все">Все</a></div>
+                <?php
+                    $termsMob = get_terms( 'categories' );
+                    if( $termsMob && !is_wp_error($termsMob) ){
+                        foreach( $termsMob as $term ){
+                        echo '<div class="swiper-slide"><a class="product-link" data-attr="' . $term->name  . '">'. $term->name .'</a></div>';
+                    }
+                }
+                ?>
             </div>
         </div>
-        <div class="catalog-select catalog-select_mob">
+        <!-- <div class="catalog-select catalog-select_mob">
             <select class="select-cat">
                 <option> INDIWOOD</option>
                 <option> INDIWOOD</option>
                 <option> INDIWOOD</option>
             </select>
-        </div>
+        </div> -->
         <div class="content__inner content__catalog" id="content__catalog">
             <div class="sidebar sidebar_catalog">
                 <div class="sidebar__title"> Каталог</div>
-                <ul class="sidebar-list" id="catalogList">
+                <ul class="sidebar-list catalogList">
                     <!-- Вывод категорий товаров -->
+                    <li><a class="is-active" data-attr="Все">Все</a></li>
                     <?php  
-                        $terms = get_terms( 'categories' );
-                        $categories = get_categories( [
-                            'taxonomy'     => 'categories',
-                            'type'         => 'product',
-                            'child_of'     => 0,
-                            'parent'       => '',
-                            'orderby'      => 'name',
-                            'order'        => 'ASC',
-                            'hide_empty'   => 1,
-                            'hierarchical' => 1,
-                            'exclude'      => '',
-                            'include'      => '',
-                            'number'       => 0,
-                            'pad_counts'   => false,
-                        ] );
-
                         $terms = get_terms( 'categories' );
                             if( $terms && !is_wp_error($terms) ){
                                 foreach( $terms as $term ){
                                 echo '<li><a data-attr="' . $term->name  . '">'. $term->name .'</a></li>';
                             }
                         }
-
                     ?>                    
                 </ul>
             </div>
@@ -116,10 +101,12 @@ Template Name: Главная
                     <ul id="catalogProduct">
                         <?php 
                             $posts = get_posts( array(
-                                'numberposts' => -1,
+                                // 'numberposts' => -1,
                                 'order' => 'ASC',
                                 'post_type'   => 'product',
                                 'suppress_filters' => true,
+                                'posts_per_page' => '2',
+                                'paged' => 1
                             ) );
 
                             foreach( $posts as $post ) { 
@@ -133,7 +120,7 @@ Template Name: Главная
                     <ul class="catalog-list__more">
                         <li class="catalog-list__item"></li>
                         <li class="catalog-list__item">
-                            <button class="btn-more" type="button">Смотреть еще</button>
+                            <button class="btn-more" id="btn_more_catalog" type="button">Смотреть еще</button>
                         </li>
                         <li class="catalog-list__item"></li>
                     </ul>
