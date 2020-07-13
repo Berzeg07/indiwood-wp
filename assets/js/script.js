@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+    $('.service-link').click(function() {
+        var attr = $(this).attr('data-attr');
+        localStorage.setItem('tab_link', attr);
+    });
+
     $('#productList a').click(function(e) {
 
         e.preventDefault();
@@ -322,17 +327,17 @@ $(document).ready(function() {
     });
     $('.tab-links_desc a:first').click();
 
-    $('.service-tabs a').click(function(e) {
-        e.preventDefault();
-        $('.service-tabs a').removeClass('is-active');
-        $(this).addClass('is-active');
-        var tab = $(this).attr('href');
-        $('.service-info__tab').not(tab).css({
-            'display': 'none'
-        });
-        $(tab).fadeIn(400);
-    });
-    $('.service-tabs a:first').click();
+    // $('.service-tabs a').click(function(e) {
+    //     e.preventDefault();
+    //     $('.service-tabs a').removeClass('is-active');
+    //     $(this).addClass('is-active');
+    //     var tab = $(this).attr('href');
+    //     $('.service-info__tab').not(tab).css({
+    //         'display': 'none'
+    //     });
+    //     $(tab).fadeIn(400);
+    // });
+    // $('.service-tabs a:first').click();
 
     $('.tab-links_mob').on('click', 'a', function(e) {
         e.preventDefault();

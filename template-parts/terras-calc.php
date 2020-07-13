@@ -100,32 +100,46 @@
                 <div class="swiper-button-next swiper-button-white"></div>
                 <div class="swiper-button-prev swiper-button-white"></div>
             </div>
-            <div class="swiper-container calculate-gallery-top terras-slider-up-five" data-item="5" data-title="05. Выберите ФОРМУ ТЕРРАСЫ И УКАЖИТЕ ГАБАРИТЫ или площадь">
+            <div class="swiper-container calculate-gallery-top terras-slider-up-five" data-item="5" data-title="05. <?php the_field('название_раздела_форма_террасы_кт', 134);?>">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="terras-top1-column">
                             <h3>П-образная форма</h3>
-                            <img src="img/terras-five1.png" alt="slider1">
+                            <div id="tab1" class="tab__box">
+                                <img src="<?php the_field('картинка_сторона_а_фт', 134);?>">
+                            </div>
+                            <div id="tab2" class="tab__box">
+                                <img src="<?php the_field('картинка_сторона_б_фт', 134);?>">
+                            </div>
+                            <div id="tab3" class="tab__box">
+                                <img src="<?php the_field('картинка_сторона_с_фт', 134);?>">
+                            </div>
+                            <div id="tab4" class="tab__box">
+                                <img src="<?php the_field('картинка_сторона_д_фт', 134);?>">
+                            </div>
+                            <div id="tab5" class="tab__box">
+                                <img src="<?php the_field('картинка_сторона_е_фт', 134);?>">
+                            </div>
                         </div>
                         <div class="div">
-                            <div class="fence-top-four-width terras-top-five-width">
-                                <label>
-                                    <span>A =</span> <input type="number" class="fence-a terras-a btn-five js-btn-five" data-input="1"> <span>mm</span>
+                            <div class="fence-top-four-width terras-top-five-width fence-top-four-tabs">
+                            <label data-tab="#tab1" class="for-tab">
+                                <span>A =</span> <input type="number" class="fence-a terras-a btn-five js-btn-five" data-input="1"> <span>mm</span>
+                                </label>
+                                <label data-tab="#tab2" class="for-tab">
+                                <span>B =</span> <input type="number" class="fence-b terras-b btn-five js-btn-five" data-input="2"> <span>mm</span>
+                                </label>
+                                <label data-tab="#tab3" class="for-tab">
+                                <span>C =</span> <input type="number" class="fence-b terras-c btn-five js-btn-five"  data-input="3"> <span>mm</span>
+                                </label>
+                                <label data-tab="#tab4" class="for-tab">
+                                <span>D =</span> <input type="number" class="fence-b terras-d btn-five js-btn-five" data-input="4"> <span>mm</span>
+                                </label>
+                                <label data-tab="#tab5" class="for-tab">
+                                <span>E =</span> <input type="number" class="fence-b terras-e btn-five js-btn-five" data-input="5"> <span>mm</span>
                                 </label>
                                 <label>
-                                    <span>B =</span> <input type="number" class="fence-b terras-b btn-five js-btn-five" data-input="2"> <span>mm</span>
-                                </label>
-                                <label>
-                                    <span>C =</span> <input type="number" class="fence-b terras-c btn-five js-btn-five"  data-input="3"> <span>mm</span>
-                                </label>
-                                <label>
-                                    <span>D =</span> <input type="number" class="fence-b terras-d btn-five js-btn-five" data-input="4"> <span>mm</span>
-                                </label>
-                                <label>
-                                    <span>E =</span> <input type="number" class="fence-b terras-e btn-five js-btn-five" data-input="5"> <span>mm</span>
-                                </label>
-                                <label>
-                                    <span>S =</span> <input type="number" class="fence-b terras-s btn-sum-five js-btn-sum-five"> <span>mm</span>
+                                <span>S =</span> <input type="number" class="fence-b terras-s btn-sum-five js-btn-sum-five"> <span>mm</span>
                                 </label>
                                 <button class="terras-top-five-width-button terras-top-five-width-button" type="button" data-num="5">Далее</button>
                             </div>
@@ -134,20 +148,31 @@
                     <div class="swiper-slide">
                         <div class="terras-top1-column">
                             <h3>Г-образная форма</h3>
-                            <img src="img/terras-five21.png" alt="slider1">
+                            <div id="tab21" class="tab__box2">
+                                <img src="<?php the_field('картинка_сторона_а_гф', 134);?>">
+                            </div>
+                            <div id="tab22" class="tab__box2">
+                                <img src="<?php the_field('картинка_сторона_в_гф', 134);?>">
+                            </div>
+                            <div id="tab23" class="tab__box2">
+                                <img src="<?php the_field('картинка_сторона_с_гф', 134);?>">
+                            </div>
+                            <div id="tab24" class="tab__box2">
+                                <img src="<?php the_field('картинка_сторона_д_гф', 134);?>">
+                            </div>
                         </div>
                         <div class="div">
-                            <div class="fence-top-four-width terras-top-five-width">
-                                <label>
+                            <div class="fence-top-four-width terras-top-five-width fence-top-four-tabs2">
+                                <label data-tab="#tab21" class="for-tab">
                                     <span>A =</span> <input type="number" class="fence-a terras-a btn-five js-btn-five2" data-input="21"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab22" class="for-tab">
                                     <span>B =</span> <input type="number" class="fence-b terras-b btn-five js-btn-five2" data-input="22"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab23" class="for-tab">
                                     <span>C =</span> <input type="number" class="fence-b terras-c btn-five js-btn-five2"  data-input="23"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab24" class="for-tab">
                                     <span>D =</span> <input type="number" class="fence-b terras-d btn-five js-btn-five2" data-input="24"> <span>mm</span>
                                 </label>
                                 <label>
@@ -160,20 +185,31 @@
                     <div class="swiper-slide">
                         <div class="terras-top1-column">
                             <h3>Г-образная форма</h3>
-                            <img src="img/terras-five31.png" alt="slider1">
+                            <div id="tab31" class="tab__box3">
+                                <img src="<?php the_field('картинка_сторона_а_гф_2', 134);?>" >
+                            </div>
+                            <div id="tab32" class="tab__box3">
+                                <img src="<?php the_field('картинка_сторона_в_гф_2', 134);?>">
+                            </div>
+                            <div id="tab33" class="tab__box3">
+                                <img src="<?php the_field('картинка_сторона_с_гф_2', 134);?>">
+                            </div>
+                            <div id="tab34" class="tab__box3">
+                                <img src="<?php the_field('картинка_сторона_д_гф_2', 134);?>">
+                            </div>
                         </div>
                         <div class="div">
-                            <div class="fence-top-four-width terras-top-five-width">
-                                <label>
+                            <div class="fence-top-four-width terras-top-five-width fence-top-four-tabs3">
+                                <label data-tab="#tab31" class="for-tab">
                                     <span>A =</span> <input type="number" class="fence-a terras-a btn-five js-btn-five3" data-input="31"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab32" class="for-tab">
                                     <span>B =</span> <input type="number" class="fence-b terras-b btn-five js-btn-five3" data-input="32"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab33" class="for-tab">
                                     <span>C =</span> <input type="number" class="fence-b terras-c btn-five js-btn-five3"  data-input="33"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab34" class="for-tab">
                                     <span>D =</span> <input type="number" class="fence-b terras-d btn-five js-btn-five3" data-input="34"> <span>mm</span>
                                 </label>
                                 <label>
@@ -186,14 +222,19 @@
                     <div class="swiper-slide">
                         <div class="terras-top1-column">
                             <h3>Прямоугольник</h3>
-                            <img src="img/terras-five41.png" alt="slider1">
+                            <div id="tab41" class="tab__box4">
+                                <img src="<?php the_field('сторона_а_пу', 134);?>">
+                            </div>
+                            <div id="tab42" class="tab__box4">
+                                <img src="<?php the_field('сторона_б_пу', 134);?>">
+                            </div>
                         </div>
                         <div class="div">
-                            <div class="fence-top-four-width terras-top-five-width terras-top-five-width_six">
-                                <label>
+                            <div class="fence-top-four-width terras-top-five-width terras-top-five-width_six fence-top-four-tabs4">
+                                <label data-tab="#tab41" class="for-tab">
                                     <span>A =</span> <input type="number" class="fence-a terras-a btn-five js-btn-five4" data-input="41"> <span>mm</span>
                                 </label>
-                                <label>
+                                <label data-tab="#tab42" class="for-tab">
                                     <span>B =</span> <input type="number" class="fence-b terras-b btn-five js-btn-five4" data-input="42"> <span>mm</span>
                                 </label>
                                 <label>
@@ -210,6 +251,7 @@
             <!-- end slider-up -->
             <div class="swiper-container calculate-gallery-top terras-slider-up-six" data-item="6" data-title="06. Выберите модель, цвет и укажите необходимые параметры лестницы">
                 <div class="swiper-wrapper">
+                    
                     <div class="swiper-slide">
                         <div class="terras-top1-question">
                             <div class="terras-top1-question_one">
@@ -257,7 +299,7 @@
                             <img src="img/slider1-big1.png" alt="slider1">
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <!-- <div class="swiper-slide">
                         <div class="terras-top1-question">
                             <div class="terras-top1-question_one">
                                 <h3>Требуется ли установка лестницы?</h3>
@@ -303,7 +345,7 @@
                         <div class="terras-top1-column">
                             <img src="img/slider1-big1.png" alt="slider1">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="swiper-button-next swiper-button-white"></div>
                 <div class="swiper-button-prev swiper-button-white"></div>
@@ -409,25 +451,25 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="gallery-thumbs1-column">
-                        <img src="img/terras-five1-small.png" alt="slider1-down">
+                        <img src="<?php the_field('миниатюра_для_слайдера_фт', 134);?>">
                     </div>
                     <span>П-образная</span>
                 </div>
                 <div class="swiper-slide">
                     <div class="gallery-thumbs1-column">
-                        <img src="img/terras-five3-small.png" alt="slider1-down">
+                        <img src="<?php the_field('миниатюра_для_слайдера_гф', 134);?>">
                     </div>
                     <span>Г-образная</span>
                 </div>
                 <div class="swiper-slide">
                     <div class="gallery-thumbs1-column">
-                        <img src="img/terras-five2-small.png" alt="slider1-down">
+                        <img src="<?php the_field('миниаютра_для_слайдера_гф_2', 134);?>">
                     </div>
                     <span>Г-образная</span>
                 </div>
                 <div class="swiper-slide">
                     <div class="gallery-thumbs1-column">
-                        <img src="img/terras-five4-small.png" alt="slider1-down">
+                        <img src="<?php the_field('миниатюра_для_слайдера_пу', 134);?>">
                     </div>
                     <span>Прямоугольник</span>
                 </div>

@@ -5,30 +5,10 @@ Template Name: Главная
 ?>
 
 <?php get_header(); ?>
-    <div class="main-banner" id="top_main">
-        <div class="banner-slider swiper-container">
-            <div class="swiper-wrapper">
-                <?php 
-                    $posts = get_posts( array(
-                        'numberposts' => -1,
-                        'post_type'   => 'banner_slider',
-                        'suppress_filters' => true,
-                    ) );
+    <!-- Слайдер в шапке -->
+    <?php get_template_part('template-parts/header-banner'); ?> 
 
-                    foreach( $posts as $post ) { 
-                        setup_postdata($post);
-                        get_template_part('template-parts/banner-post', get_post_format()); 
-                    }
-                    
-                    wp_reset_postdata(); 
-                ?>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next swiper-button-white"></div>
-            <div class="swiper-button-prev swiper-button-white"></div>
-        </div>
-    </div>
-
+    <!-- Карточка товара -->
     <div class="content card-top">
         <p class="content-title-mob">Карточка товара</p>
 
@@ -120,8 +100,6 @@ Template Name: Главная
                             'number'       => 0,
                             'pad_counts'   => false,
                         ] );
-                        // var_dump($categories);
-                        // var_dump($terms);
 
                         $terms = get_terms( 'categories' );
                             if( $terms && !is_wp_error($terms) ){
@@ -130,17 +108,7 @@ Template Name: Главная
                             }
                         }
 
-                    ?>
-                    <!-- <li><a class="is-active" href="#">Все</a></li>
-                    <li> <a href="#">Террасная доска</a></li>
-                    <li><a href="#">UnoDeck Mogano</a></li>
-                    <li><a href="#">Ступени</a></li>
-                    <li><a href="#">Заборная доска</a></li>
-                    <li><a href="#">Заборы</a></li>
-                    <li><a href="#">Ограждения</a></li>
-                    <li><a href="#">Комплектующие</a></li> -->
-
-                    
+                    ?>                    
                 </ul>
             </div>
             <div class="catalog-list-wrap">
@@ -196,6 +164,7 @@ Template Name: Главная
         <?php get_template_part('template-parts/fence-calc'); ?>
        
     </section>
+
     <!-- FORM FOR FENCE -->
     <div class="fence-form">
         <div class="fence-form__inner">
@@ -265,99 +234,8 @@ Template Name: Главная
         </div>
     </div>
 
-    <div class="service-block line-bottom" id="service_block">
-        <p class="main-title service-block__title"> <b>Услуги </b>indiwood</p>
-        <ul class="photo-list photo-list_service">
-            <li class="photo-list__item">
-                <div class="photo-list__content article">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                </div>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-1.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>01</li>
-                    <li>выезд на объект</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-2.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>02</li>
-                    <li>Замер</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-3.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>03</li>
-                    <li>Геодезия</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-4.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>04</li>
-                    <li>Проектирование</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-5.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>05</li>
-                    <li>Визуализация</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-6.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>06</li>
-                    <li>Все материалы</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-7.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>07</li>
-                    <li>Доставка</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-            <li class="photo-list__item">
-                <div class="photo-list__img"><img src="img/service-8.jpg"></div>
-                <ul class="photo-list__article">
-                    <li>08</li>
-                    <li>Монтаж</li>
-                    <li>
-                        <button class="btn photo-list__btn" type="button">Подробнее</button>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    <!-- Услуги -->
+    <?php get_template_part('template-parts/service-block'); ?>
 
     <!-- Галерея indiwood -->
     <?php get_template_part('template-parts/gallery-block'); ?>
@@ -367,145 +245,46 @@ Template Name: Главная
 
     <!-- Команда indiwood -->
     <?php get_template_part('template-parts/team-block'); ?>
-
-    <div class="news-block line-bottom">
+    
+    <!-- Новости пока скрыты -->
+    <!-- <div class="news-block line-bottom">
         <p class="main-title news-block__title">
-            indiwood <b>новости</b></p>
+            indiwood <b>новости</b></p> -->
 
         <?php 
-            $posts_news = get_posts( array(
-                // 'numberposts' => 4,
-                'order' => 'ASC',
-                'post_type'   => 'post_news',
-                'suppress_filters' => true,
-                'posts_per_page' => '2',
-                'paged' => 1
-            ) );
+            // $posts_news = get_posts( array(
+            //     // 'numberposts' => 4,
+            //     'order' => 'ASC',
+            //     'post_type'   => 'post_news',
+            //     'suppress_filters' => true,
+            //     'posts_per_page' => '2',
+            //     'paged' => 1
+            // ) );
         ?>        
-        <!-- <ul class="news-top"> -->
-        <ul class="news-listing">
+
+        <!-- <ul class="news-listing"> -->
 
             <?php    
-                foreach( $posts_news as $post ) { 
-                    setup_postdata($post);
-                    get_template_part('template-parts/news-block'); 
-                }
-                wp_reset_postdata();
+                // foreach( $posts_news as $post ) { 
+                //     setup_postdata($post);
+                //     get_template_part('template-parts/news-block'); 
+                // }
+                // wp_reset_postdata();
 
-                $count = wp_count_posts('post_news');
-                var_dump($count);
+                // $count = wp_count_posts('post_news');
+                // var_dump($count);
             ?>  
-        </ul>
+        <!-- </ul> -->
         <?php //echo //do_shortcode( '[ajax_load_more id="8957675556" loading_style="purple" container_type="ul" css_classes="news_block_list" post_type="post_news" posts_per_page="1" post_format="standard" scroll="false"]'); ?>
 
-
-        <!-- <ul class="news-top"> -->
-
-
-            <!-- <li class="news-top__item">
-                <p class="news-date">15th november 2020</p>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <ul class="news-preview-list">
-                    <li>
-                        <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </li>
-                    <li>
-                        <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </li>
-                </ul>
-                <div class="read-more"><a href="#">read more</a></div>
-            </li> -->
-
-            <!-- <li class="news-top__item">
-                <div class="news-date">15th november 2020</div>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <ul class="news-preview-list">
-                    <li>
-                        <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </li>
-                    <li>
-                        <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    </li>
-                </ul>
-                <div class="read-more"><a href="#">read more</a></div>
-            </li> -->
-        <!-- </ul> -->
-        <!-- <ul class="news-bottom">
-            <li class="news-bottom__item">
-                <div class="news-date">15th november 2020</div>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <div class="read-more"><a href="#">read more</a></div>
-            </li>
-            <li class="news-bottom__item">
-                <div class="news-date">15th november 2020</div>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                <div class="read-more"><a href="#">read more</a></div>
-            </li>
-            <li class="news-bottom__item">
-                <div class="news-date">15th november 2020</div>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <div class="read-more"><a href="#">read more</a></div>
-            </li>
-            <li class="news-bottom__item">
-                <div class="news-date">15th november 2020</div>
-                <p class="news-title">Royal beach</p>
-                <p class="news-sup-title">yacht club</p>
-                <div class="news-img"><img src="img/news.jpg"></div>
-                <p class="news-article article">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-                <div class="read-more"><a href="#">read more    </a></div>
-            </li>
-        </ul> -->
-        <div class="news-block__btn-wrap">
+        <!-- <div class="news-block__btn-wrap">
             <button class="btn news-block__btn" type="button">Смотреть еще    </button>
-        </div>
-    </div>
+        </div> -->
+    <!-- </div> -->
+    <!-- Конец новости -->
 
-
-    <div class="seo-block line-bottom">
-        <p class="main-title seo-block__title">indiwood seo <b>текст</b></p>
-        <ul class="seo-block__cont article">
-            <li>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </li>
-            <li>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </li>
-        </ul>
-        <div class="seo-block__btn-wrap">
-            <button class="btn btn-black call-btn" type="button">оставить заявку    </button>
-        </div>
-    </div>
+    <!-- Seo block -->
+    <?php get_template_part('template-parts/seo-block'); ?>
 
     <!-- Contact & map -->
     <?php get_template_part('template-parts/contact-block'); ?>

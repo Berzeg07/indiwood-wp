@@ -1950,9 +1950,11 @@ textarea {
 .photo-list__btn {
     width: 213px;
     height: 40px;
+    line-height: 40px;
     background: none;
     border: 1px solid white;
     transition: 0.5s;
+    display: inline-block;
 }
 
 .photo-list__btn:hover {
