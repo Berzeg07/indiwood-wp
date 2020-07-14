@@ -3188,7 +3188,8 @@ textarea {
     }
 }
 
-.recall-modal {
+.recall-modal,
+.modal_thanks {
     max-width: 340px;
     width: 100%;
     background: #4E4E3F;
@@ -3200,6 +3201,36 @@ textarea {
     transform: translate(-50%, -50%);
     z-index: 300;
     display: none;
+}
+
+.modal_thanks {
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.modal_thanks ul li:first-child {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.modal_thanks .close-modal {
+    right: 10px;
+    top: 10px;
+}
+
+.modal_thanks ul li:last-child {
+    font-size: 18px;
+}
+
+@media (max-width: 767px) {
+    .modal_thanks ul li:first-child {
+        font-size: 16px;
+    }
+    .modal_thanks ul li:last-child {
+        font-size: 14px;
+    }
 }
 
 @media (min-width: 1200px) {

@@ -41,14 +41,14 @@
         </div>
     </div>
     <div class="contact-block__item contact-block__item_right">
-        <form class="form-recal">
+        <form class="form-recal" method="post">
             <div class="form-recal__inp">
-                <input class="inp" type="text" placeholder="Ваше имя">
-                <input class="inp" type="text" placeholder="Email">
+                <input class="inp" type="text" name="uname" placeholder="Ваше имя">
+                <input class="inp" type="text" name="email" placeholder="Email">
             </div>
-            <textarea class="textarea"></textarea>
+            <textarea class="textarea" name="text"></textarea>
             <div class="form-recal__btn-wrap">
-                <button class="btn form-recal__btn" type="submit">Отправить    </button>
+                <button class="btn form-recal__btn" type="submit">Отправить</button>
             </div>
         </form>
     </div>

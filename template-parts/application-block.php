@@ -35,6 +35,6 @@
         <?php the_field('описание_калькулятора', 21);?>
     </div>
     <div class="btn-block btn-block_calc">
-        <button class="btn btn-green application-block__btn" type="button">Рассчитать стоимость</button>
+        <button class="btn btn-green application-block__btn calc-scroll" type="button">Рассчитать стоимость</button>
     </div>
 </div>

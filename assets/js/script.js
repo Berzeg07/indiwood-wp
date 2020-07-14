@@ -1,5 +1,49 @@
 $(document).ready(function() {
 
+    $(".form-recal").submit(function() {
+
+        var form_data = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/sendmess.php",
+            data: form_data,
+            success: function() {
+                // cleanTnanks(this);
+                // $('.modal').fadeOut();
+                $('.overlay').fadeIn();
+                $('.modal_thanks').fadeIn();
+            }
+        });
+
+        return false;
+    });
+
+    $('.recall-modal__inner').submit(function() {
+
+        var form_data = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/sendmess.php",
+            data: form_data,
+            success: function() {
+                // cleanTnanks(this);
+                $('.modal').fadeOut();
+                // $('.overlay').fadeIn();
+                $('.modal_thanks').fadeIn();
+            }
+        });
+
+        return false;
+    });
+
+    // function cleanTnanks(form) {
+    //     $('input[type="text"]').removeClass("error-input");
+    //     $("input[type=text], textarea").val("");
+    //     $('.window, #mask').hide();
+    //     $('a[href="#thanks"]').trigger('click');
+    //     // location = "spasibo.php";
+    // };
+
     $('.service-link').click(function() {
         var attr = $(this).attr('data-attr');
         localStorage.setItem('tab_link', attr);
@@ -27,7 +71,7 @@ $(document).ready(function() {
         });
     });
 
-    var page = 3;
+    var page = 15;
     $('#btn_more_catalog').click(function() {
         // alert(1);
         // console.log();
@@ -38,7 +82,7 @@ $(document).ready(function() {
             success: function(data) {
                 if (typeof data === 'string') {
                     $('#catalogProduct').html(data);
-                    page++;
+                    page = page + 3;
                     initProductCardScripts();
                 } else {
                     console.log('Ошибка запроса');
@@ -82,7 +126,9 @@ $(document).ready(function() {
         // console.log();
         if (attrVal != 'Все') {
             dataId = attrVal;
+            $('.catalog-list__more').fadeOut();
         } else {
+            $('.catalog-list__more').fadeIn();
             dataId = false;
             console.log(dataId);
         }
@@ -109,7 +155,6 @@ $(document).ready(function() {
     }
 
     function selectPriceChange() {
-
 
         var activeSelectType = $('.select-size-format').val();
 
@@ -242,12 +287,20 @@ $(document).ready(function() {
     // });
 
 
-    $(".application-block__btn").click(function() {
+    $(".calc-scroll").click(function() {
         var currentBlockoffset = $('.calculate').offset().top;
         $("html, body").animate({
             scrollTop: currentBlockoffset
         }, 500);
     });
+
+    $(".banner-btn").click(function() {
+        var currentBlockoffset = $('#product_block').offset().top;
+        $("html, body").animate({
+            scrollTop: currentBlockoffset
+        }, 500);
+    });
+
 
     $('.call-btn').click(function() {
         $('.recall-modal').fadeIn();

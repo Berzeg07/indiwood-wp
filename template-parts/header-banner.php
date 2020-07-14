@@ -20,7 +20,7 @@
                             <?php echo $banner_content ?>
                         </div>
                         <div class="main-banner__btn">
-                            <button class="btn btn-green" type="button">Заказать террасу</button>
+                            <button class="btn btn-green banner-btn" type="button">Заказать террасу</button>
                         </div>
                     </div>
                 </div>

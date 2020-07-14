@@ -10,7 +10,38 @@ add_action( 'init', 'register_post_product' );
 // Калькулятор террас *
 add_action( 'init', 'register_post_calc_terrace' );
 // Новости *
-add_action( 'init', 'register_post_news' );
+// add_action( 'init', 'register_post_news' );
+
+// Отключаем сам REST API
+add_filter('rest_enabled', '__return_false');
+// Отключаем фильтры REST API
+remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
+remove_action( 'wp_head', 'rest_output_link_wp_head', 10, 0 );
+remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 );
+remove_action( 'auth_cookie_malformed', 'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_expired', 'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_bad_username', 'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_bad_hash', 'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_valid', 'rest_cookie_collect_status' );
+remove_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', 100 );
+// Отключаем события REST API
+remove_action( 'init', 'rest_api_init' );
+remove_action( 'rest_api_init', 'rest_api_default_filters', 10, 1 );
+remove_action( 'parse_request', 'rest_api_loaded' );
+// Отключаем Embeds связанные с REST API
+remove_action( 'rest_api_init', 'wp_oembed_register_route');
+remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4 );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+
+## Закрывает все маршруты REST API от публичного доступа
+add_filter( 'rest_authentication_errors', function( $result ){
+
+	if( empty( $result ) && ! current_user_can('edit_others_posts') ){
+		return new WP_Error( 'rest_forbidden', 'You are not currently logged in.', array( 'status' => 401 ) );
+	}
+
+	return $result;
+});
 
 function get_tel_href($tel) {
     return preg_replace("/[^+0-9]/", '', $tel);
@@ -64,7 +95,7 @@ function indiwood_get_catalog() {
 				'order' => 'ASC',
 				'post_type'   => 'product',
 				'suppress_filters' => true,
-				'posts_per_page' => '2',
+				'posts_per_page' => '12',
                 'paged' => 1
 			) );
 		}
@@ -149,47 +180,47 @@ function indiwood_get_cat() {
 // 	}
 // }
 
-function register_post_news(){
-	register_post_type( 'post_news', [
-		'label'  => null,
-		'labels' => [
-			'name'               => 'Новости', // основное название для типа записи
-			'singular_name'      => 'Новости', // название для одной записи этого типа
-			'add_new'            => 'Добавить новость', // для добавления новой записи
-			'add_new_item'       => 'Добавление новости', // заголовка у вновь создаваемой записи в админ-панели.
-			'edit_item'          => 'Редактирование новости', // для редактирования типа записи
-			'new_item'           => 'Новая новость', // текст новой записи
-			'view_item'          => 'Смотреть новость', // для просмотра записи этого типа.
-			'all_items' => 'Все новости',
-			'search_items'       => 'Искать новость', // для поиска по этим типам записи
-			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
-			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
-			'parent_item_colon'  => '', // для родителей (у древовидных типов)
-			'menu_name'          => 'Новости', // название меню
-		],
-		'description'         => '',
-		'public'              => true,
-		'publicly_queryable'  => true, // зависит от public
-		'exclude_from_search' => false, // зависит от public
-		'show_ui'             => true, // зависит от public
-		'show_in_nav_menus'   => true, // зависит от public
-		'show_in_menu'        => true, // показывать ли в меню адмнки
-		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
-		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-		'rest_base'           => null, // $post_type. C WP 4.7
-		'menu_position'       => 5,
-		'menu_icon'           => 'dashicons-list-view',
-		//'capability_type'   => 'post',
-		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
-		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
-		'hierarchical'        => true,
-		'supports'            => [ 'title','editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-		'taxonomies'          => [],
-		'has_archive'         => true,
-		'rewrite'             => true,
-		'query_var'           => true,
-	] );
-}
+// function register_post_news(){
+// 	register_post_type( 'post_news', [
+// 		'label'  => null,
+// 		'labels' => [
+// 			'name'               => 'Новости', // основное название для типа записи
+// 			'singular_name'      => 'Новости', // название для одной записи этого типа
+// 			'add_new'            => 'Добавить новость', // для добавления новой записи
+// 			'add_new_item'       => 'Добавление новости', // заголовка у вновь создаваемой записи в админ-панели.
+// 			'edit_item'          => 'Редактирование новости', // для редактирования типа записи
+// 			'new_item'           => 'Новая новость', // текст новой записи
+// 			'view_item'          => 'Смотреть новость', // для просмотра записи этого типа.
+// 			'all_items' => 'Все новости',
+// 			'search_items'       => 'Искать новость', // для поиска по этим типам записи
+// 			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+// 			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+// 			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+// 			'menu_name'          => 'Новости', // название меню
+// 		],
+// 		'description'         => '',
+// 		'public'              => true,
+// 		'publicly_queryable'  => true, // зависит от public
+// 		'exclude_from_search' => false, // зависит от public
+// 		'show_ui'             => true, // зависит от public
+// 		'show_in_nav_menus'   => true, // зависит от public
+// 		'show_in_menu'        => true, // показывать ли в меню адмнки
+// 		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+// 		'show_in_rest'        => null, // добавить в REST API. C WP 4.7
+// 		'rest_base'           => null, // $post_type. C WP 4.7
+// 		'menu_position'       => 5,
+// 		'menu_icon'           => 'dashicons-list-view',
+// 		//'capability_type'   => 'post',
+// 		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+// 		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+// 		'hierarchical'        => true,
+// 		'supports'            => [ 'title','editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+// 		'taxonomies'          => [],
+// 		'has_archive'         => true,
+// 		'rewrite'             => true,
+// 		'query_var'           => true,
+// 	] );
+// }
 
 function register_post_calc_terrace(){
 	register_post_type( 'calc_terrace', [

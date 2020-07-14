@@ -64,7 +64,7 @@
     <?php endif; ?>
     
     <div class="product-info__btn-wrap">
-        <button class="btn order-btn" type="button">Сделать заказ</button>
+        <button class="btn order-btn call-btn" type="button">Сделать заказ</button>
     </div>
     <p class="product-info__article article"><?php the_field('описание_товара');?></p>
     <ul class="product-list">

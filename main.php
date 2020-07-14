@@ -26,11 +26,17 @@ Template Name: Главная
                             'order'       => 'ASC',
                             'post_type'   => 'product',
                         ) );
+                        $countList = 0;
 
                         foreach( $posts as $post ){
                             setup_postdata($post);
+                            $countList++;
                         ?>
-                            <li><a href="#" data-id="<?php the_ID();?>"><?php the_title();?></a></li>
+                            <li>
+                                <a href="#" class="product-list-link <?php
+                                if($countList < 2){ echo 'is-active';}
+                            ?>" data-id="<?php the_ID();?>"><?php the_title();?></a>
+                            </li>
                         <?php 
                         }
                         wp_reset_postdata();
@@ -105,7 +111,7 @@ Template Name: Главная
                                 'order' => 'ASC',
                                 'post_type'   => 'product',
                                 'suppress_filters' => true,
-                                'posts_per_page' => '2',
+                                'posts_per_page' => '12',
                                 'paged' => 1
                             ) );
 
@@ -117,20 +123,29 @@ Template Name: Главная
                             wp_reset_postdata(); 
                         ?>
                     </ul>
-                    <ul class="catalog-list__more">
-                        <li class="catalog-list__item"></li>
-                        <li class="catalog-list__item">
-                            <button class="btn-more" id="btn_more_catalog" type="button">Смотреть еще</button>
-                        </li>
-                        <li class="catalog-list__item"></li>
-                    </ul>
+
+                    <?php 
+                        $count_posts = wp_count_posts('product'); 
+                        $published_posts = intval($count_posts->publish);
+                    ?>
+
+                    <?php if( $published_posts > 12 ): ?>
+                        <ul class="catalog-list__more">
+                            <li class="catalog-list__item"></li>
+                            <li class="catalog-list__item">
+                                <button class="btn-more" id="btn_more_catalog" type="button">Смотреть еще</button>
+                            </li>
+                            <li class="catalog-list__item"></li>
+                        </ul>
+                    <?php endif; ?>
+
                 </div>
            
             </div>
         </div>
     </div>
     
-    <!-- Application block -->
+    <!-- Применение  -->
     <?php get_template_part('template-parts/application-block'); ?>
         
     <section class="calculate" id="calculate">
