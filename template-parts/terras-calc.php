@@ -287,28 +287,28 @@
                                                     <h4>Длина (в метрах)</h4>
                                                 </li>
                                                 <li>
-                                                    <div class="terras-calc">
-                                                        <select>
+                                                    <div class="unit-color-block">
+                                                        <div class="unit-color"></div>
+
+                                                        <div class="unit-color-down">
                                                             <?php if( have_rows('добавить_цвет_модели', 134) ): ?>
+                                                                <?php $count_list = 1; ?>
                                                                 <?php while( have_rows('добавить_цвет_модели', 134) ): the_row();
-                                                                    $color_icon_les = get_sub_field('название_цвета_модели_л');
+                                                                   $color_icon_les = get_sub_field('название_цвета_модели_л');
                                                                     $color_img_les = get_sub_field('картинка_цвета_л');
+                                                                    $count_list++;
                                                                 ?>
                                                                     <?php if($color_icon_les): ?>
-                                                                        <option value="<?php echo $color_icon_les ?>">
-                                                                            <?php echo $color_icon_les ?>
-                                                                        </option>
+                                                                        <div class="unit-color-item <?php if($count_list == 2){ echo 'unit-color-item_active'; }?>">
+                                                                            <span class="unit-color__img"><img src="<?php echo $color_img_les ?>" alt="цвет орех"></span>
+                                                                            <span class="unit-color__text"><?php echo $color_icon_les ?></span>
+                                                                        </div>
                                                                     <?php endif; ?>
                                                                 <?php endwhile; ?>
                                                             <?php endif; ?>
-                                                            <!-- <option value="Орех">Орех</option>
-                                                            <option value="Венге">Венге</option>
-                                                            <option value="Орех">Орех</option>
-                                                            <option value="Орех">Орех</option>
-                                                            <option value="Орех">Орех</option> -->
-                                                        </select>
+                                                        </div>
+                                                        <span class="unit-title">Цвет</span>
                                                     </div>
-                                                    <h4>Цвет</h4>
                                                 </li>
                                             </ul>
                                         </div>

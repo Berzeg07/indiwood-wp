@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $('.calculate__select select').selectric();
     $('.terras-calculate__select select').selectric();
-    $('.terras-calc select').selectric();
 
     $('.calculate__select select').selectric().on('change', function() {
         changeCalculate();
@@ -47,7 +46,10 @@ $(document).ready(function() {
     });
     $('.terras-slider-up-five .fence-top-four-tabs4 .for-tab:first').click();
 
+
 });
+
+
 
 function changeCalculate() {
     if (document.querySelector('.calculate__select .label').innerHTML == 'Заборов') {
@@ -506,7 +508,7 @@ function collectInfo3() {
     titleColTerras = document.querySelector('.terras-slider-up-six .swiper-slide-active .terras-top1-question_two h3').innerHTML;
     stepColTerras = document.querySelector('.terras-slider-up-six .swiper-slide-active .terras-top1-question_two .terras-steps .num').innerHTML;
     widthColTerras = document.querySelector('.terras-slider-up-six .swiper-slide-active .terras-top1-question_two .terras-width .num').innerHTML;
-    colorColTerras = document.querySelector('.terras-slider-up-six .swiper-slide-active .terras-top1-question_two .terras-calc .label').innerHTML;
+    colorColTerras = document.querySelector('.terras-slider-up-six .swiper-slide-active .terras-top1-question_two .unit-color .unit-color__text').innerHTML;
 }
 
 function setFormTitles2() {
@@ -1133,9 +1135,6 @@ var fenceGalleryThumbs3 = new Swiper('.fence-gallery_thumbs-three', {
     watchSlidesProgress: true,
     observer: true,
     observeParents: true,
-    hashNavigation: {
-        watchState: true,
-    },
     navigation: {
         nextEl: '.calculate-gallery-top .swiper-button-next',
         prevEl: '.calculate-gallery-top .swiper-button-prev',
@@ -1163,16 +1162,16 @@ var fenceGalleryTop3 = new Swiper('.fence-slider_up-three', {
 
 
 
-// new Swiper('.fence-slider_up-four', {
-// 	spaceBetween: 10,
-// 	loop:true,
-// 	observer: true,
-// 	observeParents: true,
-// 	navigation: {
-// 		nextEl: '.calculate-gallery-top .swiper-button-next',
-// 		prevEl: '.calculate-gallery-top .swiper-button-prev',
-// 	}
-// });
+new Swiper('.fence-slider_up-four', {
+    spaceBetween: 10,
+    loop: true,
+    observer: true,
+    observeParents: true,
+    navigation: {
+        nextEl: '.calculate-gallery-top .swiper-button-next',
+        prevEl: '.calculate-gallery-top .swiper-button-prev',
+    }
+});
 
 
 var fenceGalleryThumbs5 = new Swiper('.fence-gallery_thumbs-five', {
@@ -1565,8 +1564,8 @@ function setFormTitles() {
 
 /*Добавление файлов*/
 let filesBlock = document.querySelector('.fence-form__files-block');
-let files = document.querySelector('.fence-form__files');
 let filesListFence = '';
+let filesVal = '';
 
 
 files.onchange = changeFileForm;
@@ -1579,11 +1578,49 @@ function changeFileForm() {
 }
 
 function setFiles() {
+    let files = document.querySelector('.fence-form__files');
+
+    filesVal = files.files;
+
     filesBlock.innerHTML = "";
 
     let files1 = files.files;
     let num = 0;
     let span = document.createElement('span');
+
+    let formats = [".jpg", ".jpeg", ".png", ".doc", ".docx", ".xls", ".xlsx", ".pdf"];
+
+
+    for (let i = 0; i < files1.length; i++) {
+        let a = 0;
+        let b = 0;
+
+        for (let j = 0; j < formats.length; j++) {
+            b += files1[i]['size'];
+            if (files1[i]['name'].indexOf(formats[j]) != -1) {
+                a += 1;
+            }
+        }
+
+        if (a != 1) {
+            createFiles();
+
+            let span = document.createElement('span');
+            span.classList.add('font-form');
+            span.innerHTML = "Файл не должен превышать 10мб и должен иметь расширение jpg, png, jpg, doc, docx, xls, xlsx";
+            filesBlock.appendChild(span);
+            return;
+
+        } else if (b > 10000000) {
+            createFiles();
+
+            let span = document.createElement('span');
+            span.classList.add('font-form');
+            span.innerHTML = "Файл не должен превышать 10мб и должен иметь расширение jpg, png, jpg, doc, docx, xls, xlsx";
+            filesBlock.appendChild(span);
+            return;
+        }
+    }
 
 
     for (item of files1) {
@@ -1597,13 +1634,10 @@ function setFiles() {
         let span = document.createElement('span');
         let btn = document.createElement('span');
 
-        btn.classList.add('fence-form-btn');
+        // btn.classList.add('fence-form-btn');
         span.setAttribute('data-file', num);
         span.innerHTML = item.name.slice(0, 7) + '...';
         span.classList.add('fence-form-span_name', 'fence-form-span');
-        btn.onclick = function() {
-            deleteFiles.call(span);
-        };
         span.appendChild(btn);
         filesBlock.appendChild(span);
 
@@ -1617,6 +1651,14 @@ function setFiles() {
         filesBlock.appendChild(span);
     }
 
+    if (true) {
+        let span = document.createElement('span');
+        span.classList.add('fence-form-span_last', 'fence-form-span', 'fence-form-span_close');
+        span.addEventListener('click', function() {
+            createFiles();
+        });
+        filesBlock.appendChild(span);
+    }
 }
 
 function createFiles() {
@@ -1886,7 +1928,9 @@ function sendMail() {
 
 
     if (filesListFence != '') {
-        formData.append('files', filesListFence);
+        for (var i = 0; i < filesVal.length; i++) {
+            formData.append("files[" + i + "]", filesVal[i]);
+        }
     }
 
     if (fenceOptions != '') {
@@ -1896,6 +1940,8 @@ function sendMail() {
     if (fenceMessage != '') {
         formData.append('message', fenceMessage);
     }
+
+
     var xhr = new XMLHttpRequest();
 
     // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
@@ -1940,7 +1986,9 @@ function sendMailTerras() {
     formData.append('bside', bTerras);
 
     if (filesListFence != '') {
-        formData.append('files', filesListFence);
+        for (var i = 0; i < filesVal.length; i++) {
+            formData.append("files[" + i + "]", filesVal[i]);
+        }
     }
 
     if (fenceMessage != '') {
@@ -1975,7 +2023,6 @@ function sendMailTerras() {
     }
 
 
-
     var xhr = new XMLHttpRequest();
 
     // 2. Конфигурируем его: GET-запрос на URL 'phones.json'
@@ -1998,6 +2045,8 @@ function sendMailTerras() {
     document.querySelector('.fence-form__send button').style.border = '1px solid #93856f';
     document.querySelector('.fence-form__send button').setAttribute('disabled', 'disabled');
 
+    filesListFence = '';
+    fenceOptions = '';
 }
 
 
@@ -2036,3 +2085,85 @@ function wicketActive() {
 
     this.classList.add('fence-top-wicket_active');
 }
+
+
+/*SELECT COLOR*/
+let unitBlock = document.querySelectorAll('.unit-color-block');
+
+
+
+unitBlock.forEach((item) => {
+    let unitFirstImg = item.querySelector('.unit-color-down .unit-color__img').cloneNode(true);
+    let unitFirstText = item.querySelector('.unit-color__text').cloneNode(true);
+    let unitUnit = item.querySelector('.unit-color');
+
+    unitUnit.appendChild(unitFirstImg);
+    unitUnit.appendChild(unitFirstText);
+
+    unitUnit.onclick = function() {
+        if (item.querySelector('.unit-color-down').style.display == 'block') {
+            item.querySelector('.unit-color-down').style.display = 'none';
+        } else {
+            item.querySelector('.unit-color-down').style.display = 'block';
+        }
+    }
+
+
+    item.querySelectorAll('.unit-color-item').forEach((item2) => {
+        item2.onclick = function() {
+            item.querySelectorAll('.unit-color-item').forEach((item2) => {
+                item2.classList.remove('unit-color-item_active');
+            });
+
+            this.classList.add('unit-color-item_active');
+            let img = this.querySelector('.unit-color__img img').getAttribute('src');
+            let text = this.querySelector('.unit-color__text').innerHTML;
+
+            item.querySelector('.unit-color .unit-color__img img').setAttribute('src', img);
+            item.querySelector('.unit-color .unit-color__text').innerHTML = text;
+            item.querySelector('.unit-color-down').removeAttribute('style');
+        }
+    });
+
+});
+
+
+
+document.addEventListener('click', function(e) {
+    unitBlock.forEach((item) => {
+
+        const target = e.target;
+        const its_menu = target == item || item.contains(target);
+        // const its_btnMenu = target == btnMenu;
+        // const menu_is_active = menu.classList.contains('open');
+
+        if (!its_menu /*&& !its_btnMenu && menu_is_active*/ ) {
+            item.querySelector('.unit-color-down').removeAttribute('style');
+        }
+    });
+});
+
+// $(document).mouseup(function (e){
+// 	let unitBlock = $('.unit-color-block');
+// 	console.log(unitBlock);
+
+// 	unitBlock.each((item) => {
+// 		console.log($(item).html);
+
+// 		if (!$(item).is(e.target) && $(item).has(e.target).length === 0){
+// 			unit.hide();
+// 			let unit = unitBlock.querySelector('.unit-color-down').style.display = none;
+// 			$(document).find('.unit-color-down').removeAttr('style');
+// 			$(document).find('.unit-color-down').each((item)=> {
+
+// 			});
+// 		}
+// 	});
+
+// var modalctr = $(".swiper-slide-active .unit-color-block");
+// var myModal = $("swiper-slide-active .unit-color-down");
+
+// console.log(modalctr);
+
+
+// });

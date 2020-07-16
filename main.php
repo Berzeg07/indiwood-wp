@@ -206,7 +206,7 @@ Template Name: Главная
                     </div>
                 </div>
                 <div class="fence-form-column__second">
-                    <form method="post" class="fence-form__form">
+                    <form method="post" class="fence-form__form" enctype="multipart/form-data">
                         <div class="fence-form-line">
                             <div class="fence-form__subname">
                                 <h3>Unodeck vintage</h3>

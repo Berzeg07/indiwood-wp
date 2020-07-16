@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    $('.calculate').click(function(e) {
+        e.preventDefault();
+    });
+
     $(".form-recal").submit(function() {
 
         var form_data = $(this).serialize();
