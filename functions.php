@@ -413,5 +413,8 @@ function scripts_theme() {
 	wp_enqueue_script('yandexMap', 'https://api-maps.yandex.ru/2.1/?lang=ru_RU');
 	wp_enqueue_script('commonJs', get_template_directory_uri() .'/assets/js/common.js');
 	wp_enqueue_script('myScripts', get_template_directory_uri() .'/assets/js/script.js');
+
+	wp_enqueue_script('pdfJs', get_template_directory_uri() .'/assets/libs/pdfmake/pdfmake.min.js');
+	wp_enqueue_script('pdfFonts', get_template_directory_uri() .'/assets/libs/pdfmake/vfs_fonts.js');
 }
 
