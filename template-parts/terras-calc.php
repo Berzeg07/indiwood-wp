@@ -1,9 +1,15 @@
 <div class="terras-calculate">
     <div class="calculate-up up-title">
         <h1 class="calculate__title calculate__title_other terras-calculate-subtitle">Калькулятор</h1>
-        <!-- вывести дефолтный заголовок !!!!!!!!!!! -->
+       
         <h4 class="main-back-title"></h4>
         <h2>01. <?php the_field('название_раздела_кт', 134);?></h2>
+
+        <div class="checkbox-price visually-hidden">
+            <span class="delivery"><?php the_field('цена_за_доставку_кт', 134);?></span>
+            <span class="froze"><?php the_field('цена_за_замер_кт', 134);?></span>
+            <span class="mounting"><?php the_field('цена_за_монтаж_кт', 134);?></span>
+        </div>
 
         <!-- TERRAS-SLIDER-FIRST-UP -->
         <div class="terras-slider__first-up">

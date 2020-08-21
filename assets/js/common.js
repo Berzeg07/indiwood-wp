@@ -236,7 +236,7 @@ for (let i = 0; i < document.querySelectorAll('.terras-gallery-thumbs-two2').len
 
 
 	let thumbTexture = new Swiper(textureThumbs[i], {
-		spaceBetween: 0,
+		spaceBetween: 30,
 		slidesPerView: 3,
 		loop: true,
 		slidesOffsetBefore: 0,
@@ -246,12 +246,6 @@ for (let i = 0; i < document.querySelectorAll('.terras-gallery-thumbs-two2').len
 			499: {
 				slidesPerView: 2.5,
 				slidesOffsetBefore: -40
-			},
-			767: {
-				slidesPerView: 3
-			},
-			1199: {
-				slidesPerView: 3
 			}
 		}
 	});
@@ -739,6 +733,125 @@ function collectInfo3() {
 	}
 }
 
+function pdfTerras() {
+
+	let docinfoTer = {
+		info: {
+			title: 'indiwood',
+			author: 'indiwood',
+			subject: 'Расчет калькулятора с сайта indiwood',
+			keywords: 'террасная доска'
+		},
+		pageSize: 'A4',
+		pageOrientation: 'portrait', //portrait
+		pageMargins: [25, 25, 25, 25],
+
+		footer: [{
+			text: 'indiwood - individual wood solutions',
+			alignment: 'center'
+		}],
+
+		content: [{
+			columns: [{
+				width: '50%',
+				text: 'INDIWOOD',
+				alignment: 'left',
+				margin: [0, 10, 0, 50]
+			}, {
+				width: '50%',
+				text: '+7 (499) 787 99 5',
+				alignment: 'right',
+				margin: [0, 10, 0, 50]
+			}],
+		},
+		{
+			text: 'Калькулятор Террас',
+			fontSize: 16,
+			margin: [0, 0, 0, 25]
+		},
+		{
+			text: 'Площадь: ' + sTerras,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Модель доски: ' + modelTerrasTitle,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Размер доски: ' + modelTerrasSize,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Цвет доски: ' + modelTerrasColor,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Текстура доски: ' + textureTerras,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Способ укладки: ' + howWood,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Форма террасы: ' + formTerras,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Сторона А: ' + aTerras,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Сторона Б: ' + bTerras,
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: cTerras ? 'Сторона C: ' + cTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: dTerras ? 'Сторона D: ' + dTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: eTerras ? 'Сторона E: ' + eTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		},
+		{
+			text: titleColTerras ? 'Параметры лестницы' : '',
+			fontSize: 16,
+			margin: [0, 20, 0, 10]
+		}, {
+			text: titleColTerras ? 'Модель лестницы: ' + titleColTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: widthColTerras ? 'Размер лестницы: ' + widthColTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: colorColTerras ? 'Цвет лестницы: ' + colorColTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: stepColTerras ? 'Количество ступеней: ' + stepColTerras : '',
+			fontSize: 14,
+			margin: [0, 0, 0, 5]
+		}, {
+			text: 'Общая стоимость: ' + document.querySelector('.fence-form__sum-origin span').innerHTML + ' руб',
+			fontSize: 14,
+			margin: [0, 20, 0, 0]
+		},
+		]
+	};
+
+	document.querySelector('.fence-form__send a').onclick = function (e) {
+		e.preventDefault();
+		pdfMake.createPdf(docinfoTer).download('indiwood.pdf');
+	}
+}
+
 
 function setFormTitles2() {
 
@@ -770,6 +883,77 @@ function setFormTitles2() {
 	sumFence = document.querySelector('.fence-form__sum-origin span').innerHTML;
 	document.querySelector('.fence-form .fence-form__img img').setAttribute('src', imgPath2);
 
+	//Цена в чекбоксы
+	let froze = document.querySelector('.terras-calculate .checkbox-price .froze').innerHTML;
+	let delivery = document.querySelector('.terras-calculate .checkbox-price .delivery').innerHTML;
+	let mounting = document.querySelector('.terras-calculate .checkbox-price .mounting').innerHTML;
+
+	document.querySelector('.fence-form .fence-form__checkbox #one').setAttribute('data-sum', froze);
+	document.querySelector('.fence-form .fence-form__checkbox #two').setAttribute('data-sum', delivery);
+	document.querySelector('.fence-form .fence-form__checkbox #three').setAttribute('data-sum', mounting);
+
+	document.querySelector('.fence-form .fence-form__checkbox #one+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #one').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #one').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #one').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		}
+	}
+
+	document.querySelector('.fence-form .fence-form__checkbox #two+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #two').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #two').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #two').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		}
+	}
+
+	document.querySelector('.fence-form .fence-form__checkbox #three+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #three').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #three').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #three').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfTerras();
+		}
+	}
 }
 
 
@@ -1748,7 +1932,10 @@ function collectInfo() {
 	imgPath = document.querySelector('.fence-slider_up-one .swiper-slide-active .fence-top1-column img').getAttribute('src');
 
 	setFormTitles();
+	pdfFence();
+}
 
+function pdfFence() {
 	let docinfoFence = {
 		info: {
 			title: 'indiwood',
@@ -1875,6 +2062,76 @@ function setFormTitles() {
 
 	sumFence = document.querySelector('.fence-form__sum-origin span').innerHTML;
 	document.querySelector('.fence-form .fence-form__img img').setAttribute('src', imgPath);
+
+	//Цена в чекбоксы
+	let froze = document.querySelector('.fence-calculate .checkbox-price .froze').innerHTML;
+	let delivery = document.querySelector('.fence-calculate .checkbox-price .delivery').innerHTML;
+	let mounting = document.querySelector('.fence-calculate .checkbox-price .mounting').innerHTML;
+
+	document.querySelector('.fence-form .fence-form__checkbox #one').setAttribute('data-sum', froze);
+	document.querySelector('.fence-form .fence-form__checkbox #two').setAttribute('data-sum', delivery);
+	document.querySelector('.fence-form .fence-form__checkbox #three').setAttribute('data-sum', mounting);
+
+	document.querySelector('.fence-form .fence-form__checkbox #one+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #one').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #one').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfFence();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #one').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfFence();
+		}
+	}
+
+	document.querySelector('.fence-form .fence-form__checkbox #two+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #two').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #two').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfFence();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #two').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			pdfFence();
+		}
+	}
+
+	document.querySelector('.fence-form .fence-form__checkbox #three+label').onclick = function () {
+		if (!document.querySelector('.fence-form .fence-form__checkbox #three').checked) {
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) + Number(document.querySelector('.fence-form .fence-form__checkbox #three').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+
+			pdfFence();
+		} else {
+
+			let oldPrice = document.querySelector('.fence-form__sum-origin span').innerHTML.replace(/\s/g, '');
+			let newPrice = Number(oldPrice) - Number(document.querySelector('.fence-form .fence-form__checkbox #three').getAttribute('data-sum'));
+
+			document.querySelector('.fence-form__sum-origin span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			document.querySelector('.fence-form__sum span').innerHTML = String(newPrice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+			pdfFence();
+		}
+	}
 }
 
 

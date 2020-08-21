@@ -2,7 +2,15 @@
     <div class="calculate-up up-title">
         <h1 class="calculate__title calculate__title_other terras-calculate-subtitle">Калькулятор</h1>
         <h4 class="main-back-title2">Unodeck forte</h4>
+
         <h2>01. <?php the_field('название_раздела_кз_модели', 135);?></h2>
+        
+        <div class="checkbox-price visually-hidden">
+            <span class="delivery"><?php the_field('цена_за_доставку_кз', 135);?></span>
+            <span class="froze"><?php the_field('цена_за_замер_кз', 135);?></span>
+            <span class="mounting"><?php the_field('цена_за_монтаж_кз', 135);?></span>
+        </div>
+
         <div class="swiper-container calculate-gallery-top fence-slider_up-one" data-item="1" data-title="01. <?php the_field('название_раздела_кз_модели', 135);?>">
             <div class="swiper-wrapper">
                 <?php if( have_rows('галерея_моделей_кз', 135) ): ?>
