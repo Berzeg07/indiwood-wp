@@ -1,7 +1,15 @@
 $(document).ready(function() {
 
-    $('.calculate').click(function(e) {
-        e.preventDefault();
+    // $('.calculate').click(function(e) {
+    //     e.preventDefault();
+    // });
+
+    $('.apl-info-show').click(function() {
+        $(this).next().fadeIn();
+    });
+
+    $('.close-button').click(function() {
+        $('.application-info').fadeOut();
     });
 
     $(".form-recal").submit(function() {
@@ -160,6 +168,14 @@ $(document).ready(function() {
 
     function selectPriceChange() {
 
+        $('.color-preview li').click(function() {
+            var tab = $(this).attr('data-tab');
+            $(this).parents('.catalog-list__item').find('.catalog-img').not(tab).css({
+                'display': 'none'
+            });
+            $(this).parents('.catalog-list__item').find(tab).fadeIn(400);
+        });
+
         var activeSelectType = $('.select-size-format').val();
 
         $('.select-size-format').parents('.price-tab-wrap').find(activeSelectType).fadeIn();
@@ -234,6 +250,15 @@ $(document).ready(function() {
         $("#mainMenu a, .dropdown-menu__list_main a").click(function(e) {
             e.preventDefault();
             var currentBlock = $(this).attr("href");
+            currentBlockoffset = $(currentBlock).offset().top;
+            $("html, body").animate({
+                scrollTop: currentBlockoffset - 66,
+            }, 500);
+        });
+
+        $(".header-main .logo").click(function() {
+
+            var currentBlock = $(this).attr("data-href");
             currentBlockoffset = $(currentBlock).offset().top;
             $("html, body").animate({
                 scrollTop: currentBlockoffset - 66,
@@ -399,8 +424,6 @@ $(document).ready(function() {
         }
     }
 
-
-
     $('.tab-links_desc a').click(function(e) {
         e.preventDefault();
         $('.tab-links_desc a').removeClass('is-active');
@@ -412,6 +435,15 @@ $(document).ready(function() {
         $(tab).fadeIn(400);
     });
     $('.tab-links_desc a:first').click();
+
+    // $('.color-preview li').click(function() {
+    //     var tab = $(this).attr('data-tab');
+    //     $(this).parents('.catalog-list__item').find('.catalog-img').not(tab).css({
+    //         'display': 'none'
+    //     });
+    //     $(this).parents('.catalog-list__item').find(tab).fadeIn(400);
+    // });
+
 
     // $('.service-tabs a').click(function(e) {
     //     e.preventDefault();

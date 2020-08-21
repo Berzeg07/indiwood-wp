@@ -12,6 +12,7 @@
             <?php while( have_rows('блок_с_применением', 21) ): the_row();
                 $apl_name_pr = get_sub_field('где_применяется');
                 $apl_img_pr = get_sub_field('фоновая_картинка_пр');
+                $apl_article_pr = get_sub_field('подробная_информация_пр');
                 $numApl++;
             ?>
                 <?php if($apl_img_pr): ?>
@@ -21,7 +22,11 @@
                             <li>0<?php echo $numApl ?></li>
                             <li><?php echo $apl_name_pr ?></li>
                             <li>
-                                <button class="btn photo-list__btn" type="button">Подробнее</button>
+                                <!-- <button class="btn photo-list__btn apl-info-show" type="button">Подробнее</button> -->
+                                <div class="application-info">
+                                    <div class="close-button"></div>
+                                    <?php echo  $apl_article_pr ?>
+                                </div>
                             </li>
                         </ul>
                     </li>

@@ -40,6 +40,15 @@
             </div>
         </div>
     </div>
+    
+    <style>
+        @media (min-width: 1200px) {
+            .contact-block__item_right {
+                background: url("<?php the_field('фоновая_картинка_контакты', 21);?>") no-repeat center;
+            }
+        }
+    </style>
+
     <div class="contact-block__item contact-block__item_right">
         <form class="form-recal" method="post">
             <div class="form-recal__inp">

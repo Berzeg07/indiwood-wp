@@ -15,7 +15,7 @@
     <header class="header header-opacity header-main" id="header">
         <div class="header__inner">
             <div class="header__item">
-                <div class="logo">
+                <div class="logo" data-href=".main-banner">
                     <div class="logo__name"><?php bloginfo('name'); ?></div>
                     <div class="logo__article">individual wood solutions</div>
                 </div>

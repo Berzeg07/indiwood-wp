@@ -1,4 +1,8 @@
 <?php 
+// Carbon fields *
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
 add_filter('show_admin_bar', '__return_false');
 add_action('wp_enqueue_scripts', 'style_theme');
 add_action( 'wp_footer', 'scripts_theme' );
@@ -11,6 +15,13 @@ add_action( 'init', 'register_post_product' );
 add_action( 'init', 'register_post_calc_terrace' );
 // Новости *
 // add_action( 'init', 'register_post_news' );
+
+add_action( 'carbon_fields_register_fields', 'crb_register_custom_fields' );
+
+function crb_register_custom_fields() {
+// путь к пользовательскому файлу определения поля (полей), измените под себя
+	require_once __DIR__ . '/inc/carbon-fields/post-meta.php';
+}
 
 // Отключаем сам REST API
 add_filter('rest_enabled', '__return_false');
