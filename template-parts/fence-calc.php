@@ -10,7 +10,7 @@
                     <?php while( have_rows('галерея_моделей_кз', 135) ): the_row();
                         $modelName_kt = get_sub_field('название_модели_кз');
                         $bigImage_kt = get_sub_field('главное_изображение_модели_кз');
-                        $price_kz = get_sub_field('цена_модели_кз');
+                        //$price_kz = get_sub_field('цена_модели_кз');
                         $count_model++;
                     ?>
                         <?php if($bigImage_kt): ?>
@@ -82,7 +82,7 @@
                                     $model_color_img_kt = get_sub_field('большое_изображение_выбора_цвета_кз');
                                 ?>
                                     <div class="swiper-slide">
-                                        <h3><?php echo $model_color_name_kt ?></h3>
+                                        <h3 class="calculate-subtitle"><?php echo $model_color_name_kt ?></h3>
                                         <div class="fence-top1-column">
                                             <img src="<?php echo $model_color_img_kt ?>">
                                         </div>
